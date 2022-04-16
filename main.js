@@ -6,6 +6,7 @@ function mainPageFetch() {
     .then((response) => response.json())
     .then((data) => {
       searchDetails(data);
+      // imageChanger(data)
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -23,6 +24,7 @@ function searchRequest() {
         return;
       } else {
         searchDetails(data);
+        // imageChanger(data)
       }
     })
     .catch((error) => {
@@ -53,8 +55,6 @@ function searchDetails(data) {
       item.rating === "PG-13 - Teens 13 or older"
     ) {
       characterCard.classList.add("card");
-
-      // characterCard.appendChild(characterImage)
       characterCard.appendChild(characterImage);
       characterCard.appendChild(characterTitle);
       characterCard.appendChild(translate);
@@ -64,26 +64,30 @@ function searchDetails(data) {
       translate.addEventListener("click", () => {
         charactertitleJapanese.classList.remove("hide");
       });
-      characterCard.addEventListener("click", () => {
-        //set video as bacground
+      characterCard.addEventListener("click", imageChanger);
+      let main = document.querySelector("main");
+      //if main not clicked then run random slideshow
+      
 
+      function imageChanger() {
+        // closure
         let iframe = document.querySelector("iframe");
-
+        console.log(item);
         iframe.src = ``;
-
         if (item.trailer.embed_url != null) {
           // let splitUrl= item.trailer.embed_url.split(`?`)[0].toString()
           let id = `?controls=0&autoplay=1&mute=0&playlist=${item.trailer.youtube_id}&loop=1`;
           let splitUrl = item.trailer.embed_url.split(`?`)[0].toString();
           iframe.src = `${splitUrl} ${id}`;
         } else {
-          let main = document.querySelector("main");
           main.style.backgroundImage = `url(${item.images.jpg.large_image_url})`;
         }
-      });
+      }
     }
   });
 }
+
+
 
 //wild card search on name
 //if not in db display message

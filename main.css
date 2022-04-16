@@ -51,7 +51,6 @@ input {
 button {
     background: green;
     color: white;
-
     border: 1px solid green;
     font-family: 'Source Code Pro', monospace;
     background: black;
@@ -133,14 +132,16 @@ iframe {
     border: none
 
 }
+
 footer{
 color:white;
 
 }
 
-@media screen and (max-width= ){
-    input{
-        /* change size of input */
+@media screen and (max-width: 992px) {
+    input,button {
+     
     }
+  }
+  
     
-}
