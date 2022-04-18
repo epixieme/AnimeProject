@@ -31,12 +31,11 @@ function searchRequest() {
       console.error("Error:", error);
     });
 }
-
+let index = 0;
 function searchDetails(data) {
   let cardWrapper = document.querySelector(".cards");
-
-  // let reducedData = data.data.splice(0, 10);
   cardWrapper.innerHTML = "";
+
   data.data.filter((item) => {
     let characterCard = document.createElement("section");
 
@@ -64,31 +63,53 @@ function searchDetails(data) {
       translate.addEventListener("click", () => {
         charactertitleJapanese.classList.remove("hide");
       });
-      characterCard.addEventListener("click", imageChanger);
-      let main = document.querySelector("main");
-      //if main not clicked then run random slideshow
+      }
+
+      let index=0
+     
+      let iframe = document.querySelector("iframe");
+      // let id = ''
+      // let splitUrl=''
+      characterCard.addEventListener("click", ()=>{
+        // clearInterval(animeInterval)
+        imageChanger()
+      })
+       
+    setInterval(()=>{
       
+        // iframe.src=''
+   
+
+          // let splitUrl= item.trailer.embed_url.split(`?`)[0].toString()
+          if(data.data[index].trailer.embed_url){
+          id = `?controls=0&autoplay=1&mute=0&playlist=${ data.data[index].trailer.youtube_id}&loop=1`;
+          splitUrl = data.data[index].trailer.embed_url.split(`?`)[0].toString();
+          iframe.src = `${splitUrl} ${id}`;} /// this plays videos automatically 
+        
+        index++
+      },20000) // tackle tomorrow
+
+  
 
       function imageChanger() {
         // closure
-        let iframe = document.querySelector("iframe");
-        console.log(item);
-        iframe.src = ``;
-        if (item.trailer.embed_url != null) {
+  
+         iframe.src = ``;
+       
           // let splitUrl= item.trailer.embed_url.split(`?`)[0].toString()
-          let id = `?controls=0&autoplay=1&mute=0&playlist=${item.trailer.youtube_id}&loop=1`;
-          let splitUrl = item.trailer.embed_url.split(`?`)[0].toString();
+          id = `?controls=0&autoplay=1&mute=0&playlist=${item.trailer.youtube_id}&loop=1`;
+          splitUrl = item.trailer.embed_url.split(`?`)[0].toString();
           iframe.src = `${splitUrl} ${id}`;
-        } else {
-          main.style.backgroundImage = `url(${item.images.jpg.large_image_url})`;
-        }
+        
+          
       }
-    }
+    
   });
 }
 
-
-
+// set the main screen to random vids but only those cards with vids = done
+// set each card to play video on card when clicked on but only show cards with videos
+//only bring back cards with videos
 //wild card search on name
 //if not in db display message
 // automatically play random vids
