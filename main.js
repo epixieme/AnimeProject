@@ -45,31 +45,35 @@ function searchDetails(data) {
     let vidWrapper = document.createElement("iframe");
     vidWrapper.classList.add("videoWrapper");
     characterImage.src = item.images.jpg.image_url;
+    let cardButtons = document.createElement("h3");
+    cardButtons.classList.add("cardButtons");
+
     let characterTitle = document.createElement("h3");
+
     characterTitle.innerText = item.title;
-    let translate = document.createElement("button");
-    translate.innerText = "Translate to Japanese";
+    let icon = document.createElement("i");
+    let plusIcon = document.createElement("i");
+
+    icon.setAttribute("class", "lni lni-play");
+    plusIcon.setAttribute("class", "lni lni-circle-plus");
 
     let charactertitleJapanese = document.createElement("h3");
     charactertitleJapanese.innerText = item.title_japanese;
-    let icon = document.createElement('svg')
-    
 
     if (
       item.rating === "G - All Ages" ||
       (item.rating === "PG-13 - Teens 13 or older" &&
         item.trailer.embed_url != null)
     ) {
-      characterCard.classList.add("card");
-      characterCard.appendChild(characterImage);
-      characterCard.appendChild(characterTitle);
-      // characterCard.appendChild(translate);
-      characterCard.appendChild(charactertitleJapanese);
-      charactertitleJapanese.classList.add("hide");
       cardWrapper.appendChild(characterCard);
-      translate.addEventListener("click", () => {
-        charactertitleJapanese.classList.remove("hide");
-      });
+      characterCard.classList.add("card");
+
+      // characterCard.insertAfter(cardButtons, characterImage);
+      characterCard.appendChild(characterImage);
+      characterCard.appendChild(cardButtons);
+      characterCard.appendChild(characterTitle);
+
+      // charactertitleJapanese.classList.add("hide");
     }
 
     let index = 0;
@@ -100,25 +104,39 @@ function searchDetails(data) {
         characterImage.classList.add("hide");
         vidWrapper.classList.remove("hide");
         characterCard.appendChild(vidWrapper);
-        characterCard.insertBefore(vidWrapper, characterTitle);
+        characterCard.insertBefore(vidWrapper, cardButtons);
+        cardButtons.appendChild(icon);
+        cardButtons.appendChild(plusIcon);
         youTubeid = `?controls=0&autoplay=1&mute=0&playlist=${item.trailer.youtube_id}&loop=1`;
         splitUrl = item.trailer.embed_url.split(`?`)[0].toString();
-        vidWrapper.src = `${splitUrl} ${youTubeid}`;// join youtube string
-       
+        vidWrapper.src = `${splitUrl} ${youTubeid}`; // join youtube string
+        icon.classList.remove("hide");
+        plusIcon.classList.remove("hide");
+        plusIcon.addEventListener("click", addToFavourites);
       }
     }
+    let favouritesLink = document.querySelector(".favourites");
+    favouritesLink.addEventListener("click", getFavouritesPage);
 
-    function addToFavourites(){
-      // closure
-    let favourites = document.querySelector('.favourites')
-    // if button is clicked then add to favourites
+    function getFavouritesPage() {
+      let main = document.querySelector("main");
+      cardWrapper.innerHTML = "";
+      if (main) {
+        main.remove();
+      }
 
-  
-    //   if ( video ) {
-    //     video.pause();
-    //   }
-    // };
-    
+      let card = document.createElement("card");
+      card.classList.add("card");
+      card.innerHTML = localStorage.getItem("favourites");
+      cardWrapper.appendChild(card);
+    }
+   
+
+    function addToFavourites(event) {
+      localStorage.setItem(
+        "favourites",
+        event.target.parentNode.parentNode.innerHTML
+      );
     }
 
     function imageMouseOut() {
@@ -126,6 +144,8 @@ function searchDetails(data) {
       if (characterImage) {
         characterImage.classList.remove("hide");
         vidWrapper.classList.add("hide");
+        icon.classList.add("hide");
+        plusIcon.classList.add("hide");
       }
     }
   });
