@@ -117,6 +117,7 @@ function searchDetails(data) {
     }
     let favouritesLink = document.querySelector(".favourites");
     favouritesLink.addEventListener("click", getFavouritesPage);
+    // favouritesLink.addEventListener("click", removeFavourites);
 
     function getFavouritesPage() {
       let main = document.querySelector("main");
@@ -125,18 +126,34 @@ function searchDetails(data) {
         main.remove();
       }
 
-      let card = document.createElement("card");
-      card.classList.add("card");
-      card.innerHTML = localStorage.getItem("favourites");
-      cardWrapper.appendChild(card);
+      let array = localStorage.getItem("favourites").split(",");
+
+      array.forEach((item) => {
+        console.log(item)
+        let card = document.createElement("card");
+        card.classList.add("card");
+        card.innerHTML = item;
+        cardWrapper.appendChild(card);
+      });
+
     }
-   
 
     function addToFavourites(event) {
-      localStorage.setItem(
-        "favourites",
-        event.target.parentNode.parentNode.innerHTML
-      );
+      if(localStorage.getItem("favourites") ===null){
+        localStorage.setItem("favourites",  event.target.parentNode.parentNode.innerHTML);
+      }else{
+        let cardDetails =
+        localStorage.getItem("favourites") +
+        "," +
+        event.target.parentNode.parentNode.innerHTML;
+      localStorage.setItem("favourites", cardDetails);
+      }
+     
+    }
+
+    function removeFavourites(event) {
+   
+     
     }
 
     function imageMouseOut() {
@@ -150,6 +167,7 @@ function searchDetails(data) {
     }
   });
 }
+
 
 // set the main screen to random vids but only those cards with vids = done
 // set each card to play video on card when clicked on but only show cards with videos

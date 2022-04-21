@@ -23,9 +23,10 @@ h1 span {
 header nav {
     font-family: 'Open Sans', sans-serif;
     display: flex;
+  
     background: black;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     height: 100px;
     padding: 10px 40px;
     font-weight: 400;
@@ -35,8 +36,16 @@ header nav {
 nav section {
     display: flex;
     justify-content: flex-end;
-    width: 50%
+    width: 30%
 }
+
+nav a {
+    cursor: pointer;
+}
+nav a:hover{
+color:red;
+}
+
 
 main {
     display: flex;
@@ -48,6 +57,21 @@ main {
     height: 80vh;
 
 
+
+
+}
+
+main::after {
+    content: "";
+    background: url(anime.jpg);
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    height: 92.4vh;
 }
 
 input {
@@ -86,7 +110,7 @@ button {
 
 button:hover {
     background: rgba(255, 255, 255, 1);
-    color: black;
+    color: white;
 }
 
 input {
@@ -99,27 +123,26 @@ input {
 .cards {
     display: grid;
     gap: 3%;
-    padding: 50px 20px 0 10px;
+    padding: 50px 30px 0 20px;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    /* height: 800px; */
+    /* padding:0 30px; */
 }
 
 .hide {
     display: none;
 }
 
-.lni {
+ .lni {
     display: flex;
     align-items: center;
     justify-content: center;
-   
-    color:black;
+    color: white;
     font-size: 1.5rem;
     /* border: 1px solid black; */
- cursor: pointer;
+    cursor: pointer;
 }
 
-.lni:hover{
+ .lni:hover {
     transform: scale(1.2);
 
 }
@@ -127,7 +150,7 @@ input {
 .cardButtons {
     display: flex;
     justify-content: center;
-    gap: 10%;
+    gap: 50%;
 
 }
 
@@ -137,12 +160,12 @@ input {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 400px;
+    height: 420px;
     width: 100%;
-    background: white;
+    background: transparent;
     border-radius: 10px;
     border: white 1px solid;
-    color: #3D4B56;
+    color: white;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     transition: 1s ease;
     text-align: center;
@@ -173,20 +196,20 @@ a {
 }
 
 .video-container {
-
     position: flex;
     justify-content: center;
-    width: 100vw;
+    width: 80vw;
     height: 100%;
 }
 
 .videoWrapper {
     width: 100%;
     height: 80%;
+
 }
 
 iframe {
-    width: 100vw;
+    width: 100%;
     height: 100%;
     outline: none;
     border: none
@@ -215,9 +238,12 @@ footer {
 .navCategories {
     color: white;
     display: flex;
-    justify-content: space-evenly;
-    gap: 3rem;
+    justify-content: center;
+    /* justify-content: space-evenly; */
+    gap: 5rem;
     list-style: none;
+    width:100%;
+    padding-left:18rem;
 
 
 }
@@ -225,6 +251,7 @@ footer {
 .logo {
     display: inline-block;
     background: red;
+    padding:10px 10px 0 10px;
     height: 40px;
     width: 40px;
 }
