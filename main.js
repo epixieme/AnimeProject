@@ -129,32 +129,30 @@ function searchDetails(data) {
       let array = localStorage.getItem("favourites").split(",");
 
       array.forEach((item) => {
-        console.log(item)
+        console.log(item);
         let card = document.createElement("card");
         card.classList.add("card");
         card.innerHTML = item;
         cardWrapper.appendChild(card);
       });
-
     }
 
     function addToFavourites(event) {
-      if(localStorage.getItem("favourites") ===null){
-        localStorage.setItem("favourites",  event.target.parentNode.parentNode.innerHTML);
-      }else{
+      if (localStorage.getItem("favourites") === null) {
+        localStorage.setItem(
+          "favourites",
+          event.target.parentNode.parentNode.innerHTML
+        );
+      } else {
         let cardDetails =
-        localStorage.getItem("favourites") +
-        "," +
-        event.target.parentNode.parentNode.innerHTML;
-      localStorage.setItem("favourites", cardDetails);
+          localStorage.getItem("favourites") +
+          "," +
+          event.target.parentNode.parentNode.innerHTML;
+        localStorage.setItem("favourites", cardDetails);
       }
-     
     }
 
-    function removeFavourites(event) {
-   
-     
-    }
+    function removeFavourites(event) {}
 
     function imageMouseOut() {
       // closure
@@ -168,7 +166,6 @@ function searchDetails(data) {
   });
 }
 
-
 // set the main screen to random vids but only those cards with vids = done
 // set each card to play video on card when clicked on but only show cards with videos
 //only bring back cards with videos
@@ -179,3 +176,4 @@ function searchDetails(data) {
 /// on click of image play video in background and then get some stats on the characters.
 //translate name to japanese on click
 //horizontal scroll to keep things in frame
+
