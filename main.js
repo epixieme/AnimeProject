@@ -89,13 +89,24 @@ function searchDetails(data) {
 
     setInterval(() => {
       if (data.data[index].trailer.embed_url) {
+      
         id = `?controls=0&autoplay=1&mute=0&playlist=${data.data[index].trailer.youtube_id}&loop=1`;
         splitUrl = data.data[index].trailer.embed_url.split(`?`)[0].toString();
-        iframe.src = `${splitUrl} ${id}`;
-      } /// this plays videos automatically
-
+        let movie =`${splitUrl} ${id}`
+        iframe.src = movie
+     
+      }
       index++;
-    }, 20000); // tackle tomorrow
+      console.log(item)
+       /// this plays videos automatically
+      // for (i = 0; i < data.data.length; i++) {
+      //   iframe.src =''
+      // }
+     
+      if (index  > data.data.length) {index = 1}
+   
+    
+    }, 10000); // tackle tomorrow
 
     function imageMouseOver() {
       // closure
